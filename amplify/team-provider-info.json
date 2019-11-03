@@ -1,0 +1,19 @@
+{
+    "whatisanen": {
+        "awscloudformation": {
+            "AuthRoleName": "amplifytest-whatisanen-20191011201835-authRole",
+            "UnauthRoleArn": "arn:aws:iam::584361314454:role/amplifytest-whatisanen-20191011201835-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::584361314454:role/amplifytest-whatisanen-20191011201835-authRole",
+            "Region": "ap-southeast-2",
+            "DeploymentBucketName": "amplifytest-whatisanen-20191011201835-deployment",
+            "UnauthRoleName": "amplifytest-whatisanen-20191011201835-unauthRole",
+            "StackName": "amplifytest-whatisanen-20191011201835",
+            "StackId": "arn:aws:cloudformation:ap-southeast-2:584361314454:stack/amplifytest-whatisanen-20191011201835/1a4edbe0-ec08-11e9-8536-0615bd2a67d8"
+        },
+        "categories": {
+            "auth": {
+                "amplifyteste619487f": {}
+            }
+        }
+    }
+}

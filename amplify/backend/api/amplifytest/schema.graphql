@@ -1,0 +1,71 @@
+interface User {
+  id: ID!
+  email: String!
+  imageUrl: String
+  staffId: Int!
+  publicKey: String
+  userType: UserType
+  metaData: UserMetaData
+  createdAt: AWSDateTime!
+  channels: [Channel!]
+}
+type Doctor implements User
+  @model {
+  id: ID!
+  email: String!
+  imageUrl: String
+  publicKey: String
+  userType: UserType
+  staffId: Int!
+  metaData: UserMetaData
+  createdAt: AWSDateTime!
+  channels: [Channel!]
+  doctorDescription: String
+  doctorSpecialisation: DoctorSpecialisation
+}
+
+enum DoctorSpecialisation{
+  NUROLOGIST
+  HEART
+}
+
+type UserMetaData @model  {
+  hospital: String
+}
+
+enum UserType {
+  DOCTOR
+  NURSE
+  PATIENT
+}
+
+type Channel @model  {
+  id: ID!
+  lastMesssage: AWSDateTime
+  createdAt: AWSDateTime!
+  users: [User!]
+  messages: [Message!] @connection(name: "ChannelMessage")
+}
+
+type Message @model @auth(rules: [{ allow: owner, operations: [read] }]) {
+  id: ID!
+  channel: Channel! @connection(name: "ChannelMessage")
+  text: String!
+  createdAt: AWSDateTime!
+  reactions: [Reactions!]
+  files: [File!]
+}
+
+type File @model {
+  id: ID!
+  createdAt: AWSDateTime!
+  image: String
+  link: String
+}
+
+enum Reactions {
+  JOY
+  PAIN
+  FEAR
+  ANGER
+}
