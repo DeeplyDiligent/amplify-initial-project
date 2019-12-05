@@ -11,6 +11,7 @@ export const getDoctor = `query GetDoctor($id: ID!) {
     staffId
     metaData {
       hospital
+      owner
     }
     createdAt
     channels {
@@ -28,14 +29,17 @@ export const getDoctor = `query GetDoctor($id: ID!) {
         ... on Doctor {
           doctorDescription
           doctorSpecialisation
+          owner
         }
       }
       messages {
         nextToken
       }
+      owner
     }
     doctorDescription
     doctorSpecialisation
+    owner
   }
 }
 `;
@@ -54,15 +58,18 @@ export const listDoctors = `query ListDoctors(
       staffId
       metaData {
         hospital
+        owner
       }
       createdAt
       channels {
         id
         lastMesssage
         createdAt
+        owner
       }
       doctorDescription
       doctorSpecialisation
+      owner
     }
     nextToken
   }
@@ -71,6 +78,7 @@ export const listDoctors = `query ListDoctors(
 export const getUserMetaData = `query GetUserMetaData($id: ID!) {
   getUserMetaData(id: $id) {
     hospital
+    owner
   }
 }
 `;
@@ -82,6 +90,7 @@ export const listUserMetaDatas = `query ListUserMetaDatas(
   listUserMetaDatas(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       hospital
+      owner
     }
     nextToken
   }
@@ -101,16 +110,19 @@ export const getChannel = `query GetChannel($id: ID!) {
       userType
       metaData {
         hospital
+        owner
       }
       createdAt
       channels {
         id
         lastMesssage
         createdAt
+        owner
       }
       ... on Doctor {
         doctorDescription
         doctorSpecialisation
+        owner
       }
     }
     messages {
@@ -119,9 +131,11 @@ export const getChannel = `query GetChannel($id: ID!) {
         text
         createdAt
         reactions
+        owner
       }
       nextToken
     }
+    owner
   }
 }
 `;
@@ -146,11 +160,13 @@ export const listChannels = `query ListChannels(
         ... on Doctor {
           doctorDescription
           doctorSpecialisation
+          owner
         }
       }
       messages {
         nextToken
       }
+      owner
     }
     nextToken
   }
@@ -174,11 +190,13 @@ export const getMessage = `query GetMessage($id: ID!) {
         ... on Doctor {
           doctorDescription
           doctorSpecialisation
+          owner
         }
       }
       messages {
         nextToken
       }
+      owner
     }
     text
     createdAt
@@ -188,7 +206,9 @@ export const getMessage = `query GetMessage($id: ID!) {
       createdAt
       image
       link
+      owner
     }
+    owner
   }
 }
 `;
@@ -204,6 +224,7 @@ export const listMessages = `query ListMessages(
         id
         lastMesssage
         createdAt
+        owner
       }
       text
       createdAt
@@ -213,7 +234,9 @@ export const listMessages = `query ListMessages(
         createdAt
         image
         link
+        owner
       }
+      owner
     }
     nextToken
   }
@@ -225,6 +248,7 @@ export const getFile = `query GetFile($id: ID!) {
     createdAt
     image
     link
+    owner
   }
 }
 `;
@@ -239,6 +263,7 @@ export const listFiles = `query ListFiles(
       createdAt
       image
       link
+      owner
     }
     nextToken
   }

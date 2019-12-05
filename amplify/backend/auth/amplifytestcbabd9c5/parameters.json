@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "amplifyteste619487f_identitypool_e619487f",
+    "identityPoolName": "amplifytestcbabd9c5_identitypool_cbabd9c5",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "amplife619487f",
-    "userPoolName": "amplifyteste619487f_userpool_e619487f",
+    "resourceNameTruncated": "amplifcbabd9c5",
+    "userPoolName": "amplifytestcbabd9c5_userpool_cbabd9c5",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -18,8 +18,7 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-        "email",
-        "name"
+        "email"
     ],
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": 30,
@@ -29,9 +28,9 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "amplife619487f_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "amplifcbabd9c5_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "resourceName": "amplifyteste619487f",
+    "resourceName": "amplifytestcbabd9c5",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -46,13 +45,5 @@
         ]
     },
     "useDefault": "default",
-    "usernameAttributes": [
-        "email"
-    ],
-    "triggers": "{}",
-    "parentStack": {
-        "Ref": "AWS::StackId"
-    },
-    "permissions": [],
     "dependsOn": []
 }

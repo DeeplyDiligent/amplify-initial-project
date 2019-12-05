@@ -11,6 +11,7 @@ export const createDoctor = `mutation CreateDoctor($input: CreateDoctorInput!) {
     staffId
     metaData {
       hospital
+      owner
     }
     createdAt
     channels {
@@ -28,14 +29,17 @@ export const createDoctor = `mutation CreateDoctor($input: CreateDoctorInput!) {
         ... on Doctor {
           doctorDescription
           doctorSpecialisation
+          owner
         }
       }
       messages {
         nextToken
       }
+      owner
     }
     doctorDescription
     doctorSpecialisation
+    owner
   }
 }
 `;
@@ -49,6 +53,7 @@ export const updateDoctor = `mutation UpdateDoctor($input: UpdateDoctorInput!) {
     staffId
     metaData {
       hospital
+      owner
     }
     createdAt
     channels {
@@ -66,14 +71,17 @@ export const updateDoctor = `mutation UpdateDoctor($input: UpdateDoctorInput!) {
         ... on Doctor {
           doctorDescription
           doctorSpecialisation
+          owner
         }
       }
       messages {
         nextToken
       }
+      owner
     }
     doctorDescription
     doctorSpecialisation
+    owner
   }
 }
 `;
@@ -87,6 +95,7 @@ export const deleteDoctor = `mutation DeleteDoctor($input: DeleteDoctorInput!) {
     staffId
     metaData {
       hospital
+      owner
     }
     createdAt
     channels {
@@ -104,32 +113,38 @@ export const deleteDoctor = `mutation DeleteDoctor($input: DeleteDoctorInput!) {
         ... on Doctor {
           doctorDescription
           doctorSpecialisation
+          owner
         }
       }
       messages {
         nextToken
       }
+      owner
     }
     doctorDescription
     doctorSpecialisation
+    owner
   }
 }
 `;
 export const createUserMetaData = `mutation CreateUserMetaData($input: CreateUserMetaDataInput!) {
   createUserMetaData(input: $input) {
     hospital
+    owner
   }
 }
 `;
 export const updateUserMetaData = `mutation UpdateUserMetaData($input: UpdateUserMetaDataInput!) {
   updateUserMetaData(input: $input) {
     hospital
+    owner
   }
 }
 `;
 export const deleteUserMetaData = `mutation DeleteUserMetaData($input: DeleteUserMetaDataInput!) {
   deleteUserMetaData(input: $input) {
     hospital
+    owner
   }
 }
 `;
@@ -147,16 +162,19 @@ export const createChannel = `mutation CreateChannel($input: CreateChannelInput!
       userType
       metaData {
         hospital
+        owner
       }
       createdAt
       channels {
         id
         lastMesssage
         createdAt
+        owner
       }
       ... on Doctor {
         doctorDescription
         doctorSpecialisation
+        owner
       }
     }
     messages {
@@ -165,9 +183,11 @@ export const createChannel = `mutation CreateChannel($input: CreateChannelInput!
         text
         createdAt
         reactions
+        owner
       }
       nextToken
     }
+    owner
   }
 }
 `;
@@ -185,16 +205,19 @@ export const updateChannel = `mutation UpdateChannel($input: UpdateChannelInput!
       userType
       metaData {
         hospital
+        owner
       }
       createdAt
       channels {
         id
         lastMesssage
         createdAt
+        owner
       }
       ... on Doctor {
         doctorDescription
         doctorSpecialisation
+        owner
       }
     }
     messages {
@@ -203,9 +226,11 @@ export const updateChannel = `mutation UpdateChannel($input: UpdateChannelInput!
         text
         createdAt
         reactions
+        owner
       }
       nextToken
     }
+    owner
   }
 }
 `;
@@ -223,16 +248,19 @@ export const deleteChannel = `mutation DeleteChannel($input: DeleteChannelInput!
       userType
       metaData {
         hospital
+        owner
       }
       createdAt
       channels {
         id
         lastMesssage
         createdAt
+        owner
       }
       ... on Doctor {
         doctorDescription
         doctorSpecialisation
+        owner
       }
     }
     messages {
@@ -241,9 +269,11 @@ export const deleteChannel = `mutation DeleteChannel($input: DeleteChannelInput!
         text
         createdAt
         reactions
+        owner
       }
       nextToken
     }
+    owner
   }
 }
 `;
@@ -265,11 +295,13 @@ export const createMessage = `mutation CreateMessage($input: CreateMessageInput!
         ... on Doctor {
           doctorDescription
           doctorSpecialisation
+          owner
         }
       }
       messages {
         nextToken
       }
+      owner
     }
     text
     createdAt
@@ -279,7 +311,9 @@ export const createMessage = `mutation CreateMessage($input: CreateMessageInput!
       createdAt
       image
       link
+      owner
     }
+    owner
   }
 }
 `;
@@ -301,11 +335,13 @@ export const updateMessage = `mutation UpdateMessage($input: UpdateMessageInput!
         ... on Doctor {
           doctorDescription
           doctorSpecialisation
+          owner
         }
       }
       messages {
         nextToken
       }
+      owner
     }
     text
     createdAt
@@ -315,7 +351,9 @@ export const updateMessage = `mutation UpdateMessage($input: UpdateMessageInput!
       createdAt
       image
       link
+      owner
     }
+    owner
   }
 }
 `;
@@ -337,11 +375,13 @@ export const deleteMessage = `mutation DeleteMessage($input: DeleteMessageInput!
         ... on Doctor {
           doctorDescription
           doctorSpecialisation
+          owner
         }
       }
       messages {
         nextToken
       }
+      owner
     }
     text
     createdAt
@@ -351,7 +391,9 @@ export const deleteMessage = `mutation DeleteMessage($input: DeleteMessageInput!
       createdAt
       image
       link
+      owner
     }
+    owner
   }
 }
 `;
@@ -361,6 +403,7 @@ export const createFile = `mutation CreateFile($input: CreateFileInput!) {
     createdAt
     image
     link
+    owner
   }
 }
 `;
@@ -370,6 +413,7 @@ export const updateFile = `mutation UpdateFile($input: UpdateFileInput!) {
     createdAt
     image
     link
+    owner
   }
 }
 `;
@@ -379,6 +423,7 @@ export const deleteFile = `mutation DeleteFile($input: DeleteFileInput!) {
     createdAt
     image
     link
+    owner
   }
 }
 `;

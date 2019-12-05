@@ -10,7 +10,8 @@ interface User {
   channels: [Channel!]
 }
 type Doctor implements User
-  @model {
+  @model
+  @auth(rules: [{ allow: owner, operations: [update, delete] }]) {
   id: ID!
   email: String!
   imageUrl: String
@@ -24,12 +25,12 @@ type Doctor implements User
   doctorSpecialisation: DoctorSpecialisation
 }
 
-enum DoctorSpecialisation{
+enum DoctorSpecialisation {
   NUROLOGIST
   HEART
 }
 
-type UserMetaData @model  {
+type UserMetaData @model @auth(rules: [{ allow: owner, operations: [update, delete] }]) {
   hospital: String
 }
 
@@ -39,7 +40,7 @@ enum UserType {
   PATIENT
 }
 
-type Channel @model  {
+type Channel @model @auth(rules: [{ allow: owner, operations: [update, delete] }]) {
   id: ID!
   lastMesssage: AWSDateTime
   createdAt: AWSDateTime!
@@ -47,7 +48,7 @@ type Channel @model  {
   messages: [Message!] @connection(name: "ChannelMessage")
 }
 
-type Message @model @auth(rules: [{ allow: owner, operations: [read] }]) {
+type Message @model @auth(rules: [{ allow: owner, operations: [update, delete] }]) {
   id: ID!
   channel: Channel! @connection(name: "ChannelMessage")
   text: String!
@@ -56,7 +57,7 @@ type Message @model @auth(rules: [{ allow: owner, operations: [read] }]) {
   files: [File!]
 }
 
-type File @model {
+type File @model @auth(rules: [{ allow: owner, operations: [update, delete] }]) {
   id: ID!
   createdAt: AWSDateTime!
   image: String

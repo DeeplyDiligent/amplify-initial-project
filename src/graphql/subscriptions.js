@@ -11,6 +11,7 @@ export const onCreateDoctor = `subscription OnCreateDoctor {
     staffId
     metaData {
       hospital
+      owner
     }
     createdAt
     channels {
@@ -28,19 +29,22 @@ export const onCreateDoctor = `subscription OnCreateDoctor {
         ... on Doctor {
           doctorDescription
           doctorSpecialisation
+          owner
         }
       }
       messages {
         nextToken
       }
+      owner
     }
     doctorDescription
     doctorSpecialisation
+    owner
   }
 }
 `;
-export const onUpdateDoctor = `subscription OnUpdateDoctor {
-  onUpdateDoctor {
+export const onUpdateDoctor = `subscription OnUpdateDoctor($owner: String!) {
+  onUpdateDoctor(owner: $owner) {
     id
     email
     imageUrl
@@ -49,6 +53,7 @@ export const onUpdateDoctor = `subscription OnUpdateDoctor {
     staffId
     metaData {
       hospital
+      owner
     }
     createdAt
     channels {
@@ -66,19 +71,22 @@ export const onUpdateDoctor = `subscription OnUpdateDoctor {
         ... on Doctor {
           doctorDescription
           doctorSpecialisation
+          owner
         }
       }
       messages {
         nextToken
       }
+      owner
     }
     doctorDescription
     doctorSpecialisation
+    owner
   }
 }
 `;
-export const onDeleteDoctor = `subscription OnDeleteDoctor {
-  onDeleteDoctor {
+export const onDeleteDoctor = `subscription OnDeleteDoctor($owner: String!) {
+  onDeleteDoctor(owner: $owner) {
     id
     email
     imageUrl
@@ -87,6 +95,7 @@ export const onDeleteDoctor = `subscription OnDeleteDoctor {
     staffId
     metaData {
       hospital
+      owner
     }
     createdAt
     channels {
@@ -104,32 +113,38 @@ export const onDeleteDoctor = `subscription OnDeleteDoctor {
         ... on Doctor {
           doctorDescription
           doctorSpecialisation
+          owner
         }
       }
       messages {
         nextToken
       }
+      owner
     }
     doctorDescription
     doctorSpecialisation
+    owner
   }
 }
 `;
 export const onCreateUserMetaData = `subscription OnCreateUserMetaData {
   onCreateUserMetaData {
     hospital
+    owner
   }
 }
 `;
-export const onUpdateUserMetaData = `subscription OnUpdateUserMetaData {
-  onUpdateUserMetaData {
+export const onUpdateUserMetaData = `subscription OnUpdateUserMetaData($owner: String!) {
+  onUpdateUserMetaData(owner: $owner) {
     hospital
+    owner
   }
 }
 `;
-export const onDeleteUserMetaData = `subscription OnDeleteUserMetaData {
-  onDeleteUserMetaData {
+export const onDeleteUserMetaData = `subscription OnDeleteUserMetaData($owner: String!) {
+  onDeleteUserMetaData(owner: $owner) {
     hospital
+    owner
   }
 }
 `;
@@ -147,16 +162,19 @@ export const onCreateChannel = `subscription OnCreateChannel {
       userType
       metaData {
         hospital
+        owner
       }
       createdAt
       channels {
         id
         lastMesssage
         createdAt
+        owner
       }
       ... on Doctor {
         doctorDescription
         doctorSpecialisation
+        owner
       }
     }
     messages {
@@ -165,14 +183,16 @@ export const onCreateChannel = `subscription OnCreateChannel {
         text
         createdAt
         reactions
+        owner
       }
       nextToken
     }
+    owner
   }
 }
 `;
-export const onUpdateChannel = `subscription OnUpdateChannel {
-  onUpdateChannel {
+export const onUpdateChannel = `subscription OnUpdateChannel($owner: String!) {
+  onUpdateChannel(owner: $owner) {
     id
     lastMesssage
     createdAt
@@ -185,16 +205,19 @@ export const onUpdateChannel = `subscription OnUpdateChannel {
       userType
       metaData {
         hospital
+        owner
       }
       createdAt
       channels {
         id
         lastMesssage
         createdAt
+        owner
       }
       ... on Doctor {
         doctorDescription
         doctorSpecialisation
+        owner
       }
     }
     messages {
@@ -203,14 +226,16 @@ export const onUpdateChannel = `subscription OnUpdateChannel {
         text
         createdAt
         reactions
+        owner
       }
       nextToken
     }
+    owner
   }
 }
 `;
-export const onDeleteChannel = `subscription OnDeleteChannel {
-  onDeleteChannel {
+export const onDeleteChannel = `subscription OnDeleteChannel($owner: String!) {
+  onDeleteChannel(owner: $owner) {
     id
     lastMesssage
     createdAt
@@ -223,16 +248,19 @@ export const onDeleteChannel = `subscription OnDeleteChannel {
       userType
       metaData {
         hospital
+        owner
       }
       createdAt
       channels {
         id
         lastMesssage
         createdAt
+        owner
       }
       ... on Doctor {
         doctorDescription
         doctorSpecialisation
+        owner
       }
     }
     messages {
@@ -241,9 +269,11 @@ export const onDeleteChannel = `subscription OnDeleteChannel {
         text
         createdAt
         reactions
+        owner
       }
       nextToken
     }
+    owner
   }
 }
 `;
@@ -265,11 +295,13 @@ export const onCreateMessage = `subscription OnCreateMessage {
         ... on Doctor {
           doctorDescription
           doctorSpecialisation
+          owner
         }
       }
       messages {
         nextToken
       }
+      owner
     }
     text
     createdAt
@@ -279,12 +311,14 @@ export const onCreateMessage = `subscription OnCreateMessage {
       createdAt
       image
       link
+      owner
     }
+    owner
   }
 }
 `;
-export const onUpdateMessage = `subscription OnUpdateMessage {
-  onUpdateMessage {
+export const onUpdateMessage = `subscription OnUpdateMessage($owner: String!) {
+  onUpdateMessage(owner: $owner) {
     id
     channel {
       id
@@ -301,11 +335,13 @@ export const onUpdateMessage = `subscription OnUpdateMessage {
         ... on Doctor {
           doctorDescription
           doctorSpecialisation
+          owner
         }
       }
       messages {
         nextToken
       }
+      owner
     }
     text
     createdAt
@@ -315,12 +351,14 @@ export const onUpdateMessage = `subscription OnUpdateMessage {
       createdAt
       image
       link
+      owner
     }
+    owner
   }
 }
 `;
-export const onDeleteMessage = `subscription OnDeleteMessage {
-  onDeleteMessage {
+export const onDeleteMessage = `subscription OnDeleteMessage($owner: String!) {
+  onDeleteMessage(owner: $owner) {
     id
     channel {
       id
@@ -337,11 +375,13 @@ export const onDeleteMessage = `subscription OnDeleteMessage {
         ... on Doctor {
           doctorDescription
           doctorSpecialisation
+          owner
         }
       }
       messages {
         nextToken
       }
+      owner
     }
     text
     createdAt
@@ -351,7 +391,9 @@ export const onDeleteMessage = `subscription OnDeleteMessage {
       createdAt
       image
       link
+      owner
     }
+    owner
   }
 }
 `;
@@ -361,24 +403,27 @@ export const onCreateFile = `subscription OnCreateFile {
     createdAt
     image
     link
+    owner
   }
 }
 `;
-export const onUpdateFile = `subscription OnUpdateFile {
-  onUpdateFile {
+export const onUpdateFile = `subscription OnUpdateFile($owner: String!) {
+  onUpdateFile(owner: $owner) {
     id
     createdAt
     image
     link
+    owner
   }
 }
 `;
-export const onDeleteFile = `subscription OnDeleteFile {
-  onDeleteFile {
+export const onDeleteFile = `subscription OnDeleteFile($owner: String!) {
+  onDeleteFile(owner: $owner) {
     id
     createdAt
     image
     link
+    owner
   }
 }
 `;

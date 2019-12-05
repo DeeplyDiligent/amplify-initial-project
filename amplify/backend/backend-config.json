@@ -7,10 +7,9 @@
 				"authConfig": {
 					"additionalAuthenticationProviders": [],
 					"defaultAuthentication": {
-						"authenticationType": "API_KEY",
-						"apiKeyConfig": {
-							"description": "",
-							"apiKeyExpirationDays": 7
+						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+						"userPoolConfig": {
+							"userPoolId": "authamplifytestcbabd9c5"
 						}
 					}
 				}
@@ -18,7 +17,7 @@
 		}
 	},
 	"auth": {
-		"amplifyteste619487f": {
+		"amplifytestcbabd9c5": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": []
