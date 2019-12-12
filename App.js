@@ -53,6 +53,12 @@ function App() {
     subscription.unsubscribe();
   }
 
+
+  function logout(){
+    Auth.signOut({global:true})
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
+  }
   return (
     <View style={{ flex: 1 }}>
       <KeyboardAvoidingView
@@ -67,6 +73,7 @@ function App() {
           }}
         </Connect>
         <Button onPress={createNewTodo} title="Create Tod" />
+        <Button onPress={logout} title="Logout" />
 
         <TextInput
           style={{
