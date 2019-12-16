@@ -66,39 +66,43 @@ function App() {
   return (
     <View style={{ flex: 1 }}>
       <FingerprintView>
-        {(authenticate, isAuthenticated) => (
-          <KeyboardAvoidingView
-            behavior="padding"
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignContent: "center"
-            }}>
-            <Connect query={graphqlOperation(listDoctors, { limit: 20 })}>
-              {({ data: { listDoctors } }) => {
-                listDoctors = listDoctors ? listDoctors["items"] : [];
-                return listDoctors.map(doctor => (
-                  <Text key={doctor.id}>
-                    {doctor.email}:{doctor.id}
-                  </Text>
-                ));
-              }}
-            </Connect>
-            <Button onPress={createNewTodo} title="Create Tod" />
-            <Button onPress={logout} title="Logout" />
-            <Button onPress={authenticate} title="Scan" />
-
-            <TextInput
+        {(authenticate, isAuthenticated) =>
+          isAuthenticated ? (
+            <KeyboardAvoidingView
+              behavior="padding"
               style={{
-                height: 40,
-                width: 30,
-                borderColor: "gray",
-                borderWidth: 1,
-                alignSelf: "center"
-              }}
-            />
-          </KeyboardAvoidingView>
-        )}
+                flex: 1,
+                justifyContent: "center",
+                alignContent: "center"
+              }}>
+              <Connect query={graphqlOperation(listDoctors, { limit: 20 })}>
+                {({ data: { listDoctors } }) => {
+                  listDoctors = listDoctors ? listDoctors["items"] : [];
+                  return listDoctors.map(doctor => (
+                    <Text key={doctor.id}>
+                      {doctor.email}:{doctor.id}
+                    </Text>
+                  ));
+                }}
+              </Connect>
+              <Button onPress={createNewTodo} title="Create Tod" />
+              <Button onPress={logout} title="Logout" />
+              <Button onPress={authenticate} title="Scan" />
+
+              <TextInput
+                style={{
+                  height: 40,
+                  width: 30,
+                  borderColor: "gray",
+                  borderWidth: 1,
+                  alignSelf: "center"
+                }}
+              />
+            </KeyboardAvoidingView>
+          ) : (
+            "You did not authenticate"
+          )
+        }
       </FingerprintView>
     </View>
   );
