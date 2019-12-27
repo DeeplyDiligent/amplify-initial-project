@@ -11,23 +11,16 @@ import {
   TouchableHighlight
 } from "react-native";
 import { Connect, withAuthenticator } from "aws-amplify-react-native";
-import API, { graphqlOperation } from "@aws-amplify/api";
-import PubSub from "@aws-amplify/pubsub";
-import { createDoctor } from "./src/graphql/mutations";
-import { subscribeDoctors } from "./src/graphql/subscriptions";
-import { listDoctors } from "./src/graphql/queries";
-import aws_exports from "./aws-exports";
-import { onCreateDoctor } from "./src/graphql/subscriptions";
-import { Auth } from "aws-amplify";
-import * as LocalAuthentication from "expo-local-authentication";
-import FingerprintView from "./fingerprintView";
 
-API.configure(aws_exports);
-Auth.configure(aws_exports);
-PubSub.configure(aws_exports);
+import * as LocalAuthentication from "expo-local-authentication";
+import FingerprintView from "../../util/fingerprintView";
+import { createDoctor } from "../../graphql/mutations";
+import { listDoctors } from "../../graphql/queries";
+import { onCreateDoctor } from "../../graphql/subscriptions";
+import { API, graphqlOperation, Auth } from "aws-amplify";
 
 const initialState = { todos: [] };
-const reducer = (state, action) => {
+const reducer = (state:any, action:any) => {
   switch (action.type) {
     case "QUERY":
       return { ...state, todos: action.todos };
@@ -37,27 +30,23 @@ const reducer = (state, action) => {
       return state;
   }
 };
-
 async function createNewTodo() {
   const todo = { name: "Use AppSync", description: "Realtime and Offline" };
   await API.graphql(graphqlOperation(createDoctor, { input: todo }));
 }
-
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-
   function unsubscribe() {
     const subscription = API.graphql(
       graphqlOperation(onCreateDoctor)
     ).subscribe({
-      next: eventData => {
+      next: (eventData:any) => {
         const todo = eventData.value.data.onCreateDoctor;
         dispatch({ type: "SUBSCRIPTION", todo });
       }
     });
     subscription.unsubscribe();
   }
-
   function logout() {
     Auth.signOut({ global: true })
       .then(data => console.log(data))
@@ -66,7 +55,7 @@ function App() {
   return (
     <View style={{ flex: 1 }}>
       <FingerprintView>
-        {(authenticate, isAuthenticated) =>
+        {(authenticate:()=>void, isAuthenticated:boolean) =>
           isAuthenticated ? (
             <KeyboardAvoidingView
               behavior="padding"
@@ -74,11 +63,12 @@ function App() {
                 flex: 1,
                 justifyContent: "center",
                 alignContent: "center"
-              }}>
+              }}
+            >
               <Connect query={graphqlOperation(listDoctors, { limit: 20 })}>
-                {({ data: { listDoctors } }) => {
-                  listDoctors = listDoctors ? listDoctors["items"] : [];
-                  return listDoctors.map(doctor => (
+                {( data: any ) => {
+                  let listDoctors:Array<any> = data.listDoctors ? data.listDoctors["items"] : [];
+                  return listDoctors.map( (doctor:any) => (
                     <Text key={doctor.id}>
                       {doctor.email}:{doctor.id}
                     </Text>
@@ -100,14 +90,13 @@ function App() {
               />
             </KeyboardAvoidingView>
           ) : (
-            "You did not authenticate"
+            <View>You did not authenticate</View>
           )
         }
       </FingerprintView>
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#ddeeff",
@@ -127,5 +116,4 @@ const styles = StyleSheet.create({
     alignItems: "center"
   }
 });
-
 export default withAuthenticator(App);

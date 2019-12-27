@@ -2,8 +2,9 @@
   "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 4849,
+  "packagerPid": 57155,
   "expoServerNgrokUrl": "https://tf-5u7.anonymous.amplifytest.exp.direct",
   "packagerNgrokUrl": "https://packager.tf-5u7.anonymous.amplifytest.exp.direct",
-  "ngrokPid": 4873
+  "ngrokPid": 57166,
+  "webpackServerPort": null
 }
