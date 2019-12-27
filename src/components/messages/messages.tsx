@@ -4,7 +4,7 @@ import {
   View,
   Button,
   TextInput,
-  KeyboardAvoidingView,
+  KeyboardAvoidingView
 } from "react-native";
 import { Connect, withAuthenticator } from "aws-amplify-react-native";
 
@@ -13,9 +13,10 @@ import { createDoctor } from "../../graphql/mutations";
 import { listDoctors } from "../../graphql/queries";
 import { onCreateDoctor } from "../../graphql/subscriptions";
 import { API, graphqlOperation, Auth } from "aws-amplify";
+import { switchTo, Screens } from "../../util/router";
 
 const initialState = { todos: [] };
-const reducer = (state:any, action:any) => {
+const reducer = (state: any, action: any) => {
   switch (action.type) {
     case "QUERY":
       return { ...state, todos: action.todos };
@@ -29,13 +30,17 @@ async function createNewTodo() {
   const todo = { name: "Use AppSync", description: "Realtime and Offline" };
   await API.graphql(graphqlOperation(createDoctor, { input: todo }));
 }
-const Messages = () => {
+type MessagesProps = {
+  navigation: any;
+};
+const Messages = ({ navigation }: MessagesProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
   function unsubscribe() {
     const subscription = API.graphql(
       graphqlOperation(onCreateDoctor)
     ).subscribe({
-      next: (eventData:any) => {
+      next: (eventData: any) => {
         const todo = eventData.value.data.onCreateDoctor;
         dispatch({ type: "SUBSCRIPTION", todo });
       }
@@ -50,7 +55,7 @@ const Messages = () => {
   return (
     <View style={{ flex: 1 }}>
       <FingerprintView>
-        {(authenticate:()=>void, isAuthenticated:boolean) =>
+        {(authenticate: () => void, isAuthenticated: boolean) =>
           isAuthenticated ? (
             <KeyboardAvoidingView
               behavior="padding"
@@ -58,12 +63,13 @@ const Messages = () => {
                 flex: 1,
                 justifyContent: "center",
                 alignContent: "center"
-              }}
-            >
+              }}>
               <Connect query={graphqlOperation(listDoctors, { limit: 20 })}>
-                {( result: any ) => {
-                  let listDoctors:Array<any> = result.data.listDoctors ? result.data.listDoctors["items"] : [];
-                  return listDoctors.map( (doctor:any) => (
+                {(result: any) => {
+                  let listDoctors: Array<any> = result.data.listDoctors
+                    ? result.data.listDoctors["items"]
+                    : [];
+                  return listDoctors.map((doctor: any) => (
                     <Text key={doctor.id}>
                       {doctor.email}:{doctor.id}
                     </Text>
@@ -73,6 +79,12 @@ const Messages = () => {
               <Button onPress={createNewTodo} title="Create Tod" />
               <Button onPress={logout} title="Logout" />
               <Button onPress={authenticate} title="Scan" />
+              <Button
+                onPress={() =>
+                  switchTo(navigation.navigate, Screens.ChannelsPage, {})
+                }
+                title="Channels"
+              />
 
               <TextInput
                 style={{
@@ -91,5 +103,5 @@ const Messages = () => {
       </FingerprintView>
     </View>
   );
-}
+};
 export default withAuthenticator(Messages);

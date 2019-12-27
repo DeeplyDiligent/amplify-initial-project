@@ -1,7 +1,7 @@
-import React from 'react';
-import { View } from 'react-native';
-const Channels = () =>{
-    return <View>Channels</View>
-}
+import React from "react";
+import { View, Text } from "react-native";
+const Channels = () => {
+  return <Text>Channels</Text>;
+};
 
-export default Channels
+export default Channels;
