@@ -29,7 +29,7 @@ async function createNewTodo() {
   const todo = { name: "Use AppSync", description: "Realtime and Offline" };
   await API.graphql(graphqlOperation(createDoctor, { input: todo }));
 }
-const App = () => {
+const Messages = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   function unsubscribe() {
     const subscription = API.graphql(
@@ -92,4 +92,4 @@ const App = () => {
     </View>
   );
 }
-export default withAuthenticator(App);
+export default withAuthenticator(Messages);
