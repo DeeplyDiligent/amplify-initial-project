@@ -13,7 +13,7 @@ import { createDoctor } from "../../graphql/mutations";
 import { listDoctors } from "../../graphql/queries";
 import { onCreateDoctor } from "../../graphql/subscriptions";
 import { API, graphqlOperation, Auth } from "aws-amplify";
-import { switchTo, Screens } from "../../util/router";
+import { switchTo, Screens } from "../../routes/router";
 
 const initialState = { todos: [] };
 const reducer = (state: any, action: any) => {
