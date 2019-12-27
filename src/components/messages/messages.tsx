@@ -61,6 +61,7 @@ const Messages = ({ navigation }: MessagesProps) => {
               behavior="padding"
               style={{
                 flex: 1,
+                padding: 20,
                 justifyContent: "center",
                 alignContent: "center"
               }}>
@@ -69,27 +70,45 @@ const Messages = ({ navigation }: MessagesProps) => {
                   let listDoctors: Array<any> = result.data.listDoctors
                     ? result.data.listDoctors["items"]
                     : [];
-                  return listDoctors.map((doctor: any) => (
-                    <Text key={doctor.id}>
-                      {doctor.email}:{doctor.id}
-                    </Text>
-                  ));
+                  return (
+                    <View>
+                      <Text style={{ textAlign: "center", paddingBottom: 5 }}>
+                        A total of {listDoctors.length} items were retrieved
+                        from AWS DynamoDB:
+                      </Text>
+                      {listDoctors.slice(0, 2).map((doctor: any) => (
+                        <Text
+                          style={{ textAlign: "center", paddingBottom: 5 }}
+                          key={doctor.id}>
+                          {doctor.email}:{doctor.id}
+                        </Text>
+                      ))}
+                      {listDoctors.length > 2 ? (
+                        <Text style={{ textAlign: "center", paddingBottom: 5 }}>
+                          And More...
+                        </Text>
+                      ) : (
+                        false
+                      )}
+                    </View>
+                  );
                 }}
               </Connect>
-              <Button onPress={createNewTodo} title="Create Tod" />
+              <Button onPress={createNewTodo} title="Create New..." />
               <Button onPress={logout} title="Logout" />
-              <Button onPress={authenticate} title="Scan" />
+              <Button onPress={authenticate} title="Scan (test fingerprint)" />
               <Button
                 onPress={() =>
                   switchTo(navigation.navigate, Screens.ChannelsPage, {})
                 }
-                title="Channels"
+                title="Navigate to channels page (test routing)"
               />
 
               <TextInput
+                placeholder="Test keyboardavoidingview"
                 style={{
                   height: 40,
-                  width: 30,
+                  width: 300,
                   borderColor: "gray",
                   borderWidth: 1,
                   alignSelf: "center"
